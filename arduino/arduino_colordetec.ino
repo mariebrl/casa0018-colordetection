@@ -2,9 +2,9 @@
 
 #include <TensorFlowLite.h>
 
-// we are including our model in a seperate file to keep the code simpler
+// including our model in a seperate file to keep the code simpler
 #include "model.h"
-// we are using a variety of functions from the TensorFlowLite library and need to reference them here
+// using a variety of functions from the TensorFlowLite library and need to reference them here
 #include "tensorflow/lite/micro/all_ops_resolver.h"
 #include "tensorflow/lite/c/common.h"
 #include "tensorflow/lite/micro/micro_error_reporter.h"
@@ -20,18 +20,19 @@
 
   Hardware: Arduino Nano 33 BLE Sense board.
 
-*/
+
 #include <Wire.h>
 #include <Adafruit_TCS34725.h>
 #include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
-
+//#include <Adafruit_SSD1306.h>
 
 
 #define OLED_RESET 4
-Adafruit_SSD1306 display(OLED_RESET);
+//Adafruit_SSD1306 display(OLED_RESET);
 
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_600MS, TCS34725_GAIN_1X);
+*/
+
 #define RED 22
 
 // global variables used for TensorFlow Lite (Micro)
@@ -56,8 +57,11 @@ const int kInferencesPerCycle = 8000;
 int inference_count = 0;
 
 // array to map gesture index to a name
-const char *COLOURS[] = {"BLACK", "BLUE", "BROWN", "GREEN", "ORANGE", "PINK", "PURPLE", "RED", "WHITE", "YELLOW"};
+const char *COLOURS[] = {"BLACK", "BLUE", "BROWN", "GREEN", "GREY", "ORANGE", "PINK", "PURPLE", "RED", "WHITE", "YELLOW"};
 #define NUM_CLASSES (sizeof(COLOURS) / sizeof(COLOURS[0]))
+
+// TF_LITE_REPORT_ERROR
+#define TF_LITE_REPORT_ERROR
 
 // compteur loop
 int compteur = 3;
@@ -154,10 +158,8 @@ void setup() {
   
 }
 
-void loop(int compteur) {
-  while(compteur > 0){
-
-  
+void loop() {
+  //while(compteur > 0){
 
   /*
    * The Loop has five main steps:
@@ -259,8 +261,7 @@ void loop(int compteur) {
   
   Serial.print(" ");
   compteur = compteur - 1;
-  }
-
+  
 
   // Add ddelay
   delay(5000);
